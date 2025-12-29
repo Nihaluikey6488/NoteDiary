@@ -5,12 +5,10 @@ const App = () => {
 
 const [details, setDetails] = useState("");
 const [desc, setDesc] = useState("");
-let localtask=localStorage.getItem("all-tasks") || []
-let oldtask=JSON.parse(localtask)
-
-const [task, setTask] = useState(oldtask);
+let localtask=JSON.parse(localStorage.getItem("all-tasks")) || []
 
 
+const [task, setTask] = useState(localtask);
 
 const handleSubmit=(e)=>{
 e.preventDefault();
