@@ -5,23 +5,33 @@ const App = () => {
 
 const [details, setDetails] = useState("");
 const [desc, setDesc] = useState("");
-const [task, setTask] = useState([]);
+let localtask=localStorage.getItem("all-tasks") || []
+let oldtask=JSON.parse(localtask)
+
+const [task, setTask] = useState(oldtask);
+
 
 
 const handleSubmit=(e)=>{
 e.preventDefault();
 
-let copyTask=[...task]
-copyTask.push({task:details,desc:desc})
+ localtask=[...task]
+localtask.push({task:details,desc:desc})
 
-setTask(copyTask)
+setTask(localtask)
+localStorage.setItem("all-tasks",JSON.stringify(localtask))
 setDetails("")
 setDesc("")
 
 
 }
 const deletecard=(idx)=>{
-setTask(task.filter((_, i) => i !== idx))
+  let newtasks=[...task]
+// setTask(task.filter((_, i) => i !== idx))
+newtasks.splice(idx,1)
+setTask(newtasks)
+localStorage.setItem("all-tasks",JSON.stringify(newtasks))
+
 
 }
   
